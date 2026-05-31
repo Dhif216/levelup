@@ -15,6 +15,7 @@ type CartItem = {
 function App() {
   const [cartOpen, setCartOpen] = useState(false)
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0)
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -36,7 +37,7 @@ function App() {
   return (
     <Router>
       <nav className="fixed top-0 left-0 w-full z-40 flex justify-between items-center px-8 md:px-16 py-5 bg-background/40 backdrop-blur-md transition-all duration-300">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
           <div className="w-2 h-2 bg-secondary-fixed rounded-full"></div>
           <div className="text-lg md:text-xl font-mono font-bold tracking-widest text-secondary uppercase">LEVELUP</div>
         </Link>
@@ -53,18 +54,59 @@ function App() {
           </Link>
         </div>
 
-        <button
-          onClick={() => setCartOpen(!cartOpen)}
-          className="relative p-3 rounded-lg hover:bg-secondary-fixed/20 transition-all text-secondary-fixed outline-none ring-0 border-none overflow-visible"
-        >
-          <span className="material-symbols-outlined text-2xl">shopping_bag</span>
-          {cartCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-secondary-fixed text-black text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center outline-none ring-0 border-none shadow-lg">
-              {cartCount}
+        <div className="flex items-center gap-4">
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-secondary-fixed hover:bg-secondary-fixed/20 rounded-lg transition-colors"
+          >
+            <span className="material-symbols-outlined text-2xl">
+              {mobileMenuOpen ? 'close' : 'menu'}
             </span>
-          )}
-        </button>
+          </button>
+
+          <button
+            onClick={() => setCartOpen(!cartOpen)}
+            className="relative p-3 rounded-lg hover:bg-secondary-fixed/20 transition-all text-secondary-fixed outline-none ring-0 border-none overflow-visible"
+          >
+            <span className="material-symbols-outlined text-2xl">shopping_bag</span>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-secondary-fixed text-black text-sm font-bold rounded-full w-6 h-6 flex items-center justify-center outline-none ring-0 border-none shadow-lg">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </div>
       </nav>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed top-20 left-0 w-full bg-background/95 backdrop-blur-md z-30 md:hidden border-b border-secondary-fixed/20">
+          <div className="p-6 space-y-4">
+            <Link 
+              className="block text-secondary font-mono text-sm tracking-widest uppercase font-bold hover:text-secondary-fixed transition-colors py-3 border-b border-white/10" 
+              to="/"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              SHOP
+            </Link>
+            <Link 
+              className="block text-secondary font-mono text-sm tracking-widest uppercase font-bold hover:text-secondary-fixed transition-colors py-3 border-b border-white/10" 
+              to="/catalog"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              DROPS
+            </Link>
+            <Link 
+              className="block text-secondary font-mono text-sm tracking-widest uppercase font-bold hover:text-secondary-fixed transition-colors py-3" 
+              to="/about"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              ABOUT
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Cart Drawer */}
       {cartOpen && (

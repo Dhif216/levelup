@@ -261,7 +261,7 @@ export default function HomePage({ cartItems, setCartItems }: HomePageProps) {
   return (
     <div className="bg-background text-on-background selection:bg-secondary-fixed selection:text-black">
       {/* Hero Section */}
-      <header className="relative w-full flex items-center overflow-hidden" style={{ minHeight: '100vh' }} id="shop">
+      <header className="relative w-full flex items-center overflow-hidden pt-24 md:pt-0" style={{ minHeight: '100vh' }} id="shop">
         <div className="absolute inset-0 z-0">
           <img
             ref={heroImgRef}
@@ -273,20 +273,23 @@ export default function HomePage({ cartItems, setCartItems }: HomePageProps) {
         </div>
 
         {/* Main content */}
-        <div className="relative z-10 w-full px-8 md:px-16 max-w-6xl mx-auto space-y-10">
-          <div className="max-w-2xl space-y-8">
+        <div className="relative z-10 w-full px-6 md:px-16 max-w-6xl mx-auto space-y-8 md:space-y-10">
+          <div className="max-w-2xl space-y-6 md:space-y-8">
             <div>
-              <span className="font-mono text-xs text-secondary-fixed uppercase tracking-widest font-bold mb-4 block">Drop 01</span>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl text-secondary uppercase leading-tight tracking-tight font-graffiti-clean mb-6">
+              <span className="font-mono text-xs text-secondary-fixed uppercase tracking-widest font-bold mb-3 md:mb-4 block">Drop 01</span>
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-secondary uppercase leading-tight tracking-tight font-graffiti-clean mb-4 md:mb-6">
                 HEAVYWEIGHT<br />COMFORT.<br />MADE FOR<br />THE STREETS.
               </h1>
             </div>
           </div>
-          <div className="absolute top-1/2 right-8 md:right-16 transform -translate-y-1/2 max-w-xs">
+          <div className="hidden md:block md:absolute md:top-1/2 md:right-16 md:transform md:-translate-y-1/2 md:max-w-xs">
             <p className="text-lg md:text-xl text-on-surface-variant leading-relaxed">
               Premium 450GSM French terry. Built for durability. Designed for skaters who demand quality that lasts.
             </p>
           </div>
+          <p className="md:hidden text-base text-on-surface-variant leading-relaxed max-w-sm">
+            Premium 450GSM French terry. Built for durability. Designed for skaters who demand quality that lasts.
+          </p>
         </div>
 
         {/* Canvas overlay */}
@@ -298,12 +301,12 @@ export default function HomePage({ cartItems, setCartItems }: HomePageProps) {
         ></canvas>
 
         {/* CTA Buttons */}
-        <div className="absolute bottom-12 left-8 md:left-16 z-50 flex flex-col sm:flex-row gap-4 pointer-events-auto">
-          <Link to="/catalog" className="group relative bg-secondary-fixed text-black font-button-text text-button-text py-5 px-12 uppercase transition-all duration-300 hover:bg-white hover:scale-105 active:scale-95 font-bold tracking-widest shadow-xl hover:shadow-2xl overflow-hidden rounded-lg pointer-events-auto inline-block text-center">
+        <div className="absolute bottom-8 md:bottom-12 left-6 md:left-16 right-6 md:right-auto z-50 flex flex-col sm:flex-row gap-3 md:gap-4 pointer-events-auto">
+          <Link to="/catalog" className="group relative bg-secondary-fixed text-black font-button-text text-button-text py-4 md:py-5 px-8 md:px-12 uppercase transition-all duration-300 hover:bg-white hover:scale-105 active:scale-95 font-bold tracking-widest shadow-xl hover:shadow-2xl overflow-hidden rounded-lg pointer-events-auto text-center text-sm md:text-base whitespace-nowrap flex-1 sm:flex-none">
             <span className="relative z-10">SHOP THE DROP</span>
             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 -z-0"></div>
           </Link>
-          <button className="group border-2 border-secondary text-secondary font-button-text text-button-text py-5 px-12 uppercase transition-all duration-300 hover:bg-secondary/20 hover:border-secondary-fixed hover:text-secondary-fixed active:scale-95 font-bold tracking-widest backdrop-blur-sm rounded-lg pointer-events-auto">
+          <button className="group border-2 border-secondary text-secondary font-button-text text-button-text py-4 md:py-5 px-8 md:px-12 uppercase transition-all duration-300 hover:bg-secondary/20 hover:border-secondary-fixed hover:text-secondary-fixed active:scale-95 font-bold tracking-widest backdrop-blur-sm rounded-lg pointer-events-auto text-sm md:text-base whitespace-nowrap flex-1 sm:flex-none">
             EXPLORE LOOKBOOK
           </button>
         </div>
