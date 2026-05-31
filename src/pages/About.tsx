@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import skaPng from '../assets/png ska.png'
 import heroPng from '../assets/hero1.png'
@@ -21,6 +21,17 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 })
   const [showZoom, setShowZoom] = useState(false)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Detect if mobile on mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0)
   const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
@@ -159,7 +170,7 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
 
       <main>
         {/* Hero Section with Background Image */}
-        <section className="relative h-screen w-full overflow-hidden">
+        <section className="relative w-full overflow-hidden" style={{ height: 'calc(100vh - 4.5rem)' }}>
           <div className="absolute inset-0">
             <img 
               src={heroPng} 
@@ -168,22 +179,22 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50"></div>
           </div>
-          <div className="relative h-full flex flex-col justify-center px-8 md:px-16 max-w-7xl mx-auto">
-            <span className="font-mono text-xs text-secondary-fixed uppercase tracking-widest font-bold mb-4 block">Our Story</span>
-            <h1 className="font-graffiti-clean text-6xl md:text-7xl lg:text-8xl text-secondary-fixed uppercase leading-tight mb-6">LEVELUP</h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mb-8">
+          <div className="relative h-full flex flex-col justify-center px-6 md:px-16 max-w-7xl mx-auto py-12">
+            <span className="font-mono text-xs md:text-sm text-secondary-fixed uppercase tracking-widest font-bold mb-3 md:mb-4 block">Our Story</span>
+            <h1 className="font-graffiti-clean text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-secondary-fixed uppercase leading-tight mb-3 md:mb-6">LEVELUP</h1>
+            <p className="text-sm md:text-base lg:text-lg text-gray-300 leading-relaxed max-w-2xl mb-6 md:mb-8">
               Born from the streets, crafted for the culture. LEVELUP is more than streetwear—it's a movement for those who refuse to blend in.
             </p>
-            <div className="flex gap-4 flex-wrap">
+            <div className="flex gap-3 md:gap-4 flex-col sm:flex-row w-full sm:w-auto">
               <Link 
                 to="/catalog" 
-                className="px-8 py-4 bg-secondary-fixed text-black font-graffiti-clean text-lg uppercase rounded-lg hover:bg-secondary-fixed/80 transition-all duration-300 shadow-lg hover:shadow-secondary-fixed/40 border-2 border-secondary-fixed"
+                className="px-4 md:px-8 py-2 md:py-4 bg-secondary-fixed text-black font-graffiti-clean text-sm md:text-lg uppercase rounded-lg hover:bg-secondary-fixed/80 transition-all duration-300 shadow-lg hover:shadow-secondary-fixed/40 border-2 border-secondary-fixed text-center flex-1 sm:flex-none"
               >
                 Shop Now
               </Link>
               <Link 
                 to="/catalog" 
-                className="px-8 py-4 border-2 border-secondary-fixed text-secondary-fixed font-graffiti-clean text-lg uppercase rounded-lg hover:bg-secondary-fixed/10 transition-all duration-300 shadow-lg"
+                className="px-4 md:px-8 py-2 md:py-4 border-2 border-secondary-fixed text-secondary-fixed font-graffiti-clean text-sm md:text-lg uppercase rounded-lg hover:bg-secondary-fixed/10 transition-all duration-300 shadow-lg text-center flex-1 sm:flex-none"
               >
                 Check Drops
               </Link>
@@ -192,28 +203,30 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
         </section>
 
         {/* Story Section with Image */}
-        <section className="px-8 md:px-16 py-20 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative overflow-visible">
-            <div className="space-y-6">
-              <h2 className="font-graffiti-clean text-5xl md:text-6xl text-secondary-fixed uppercase">The Beginning</h2>
-              <p className="text-on-surface-variant leading-relaxed text-lg">
+        <section className="px-6 md:px-16 py-16 md:py-20 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative overflow-visible">
+            <div className="space-y-4 md:space-y-6">
+              <h2 className="font-graffiti-clean text-4xl md:text-5xl lg:text-6xl text-secondary-fixed uppercase">The Beginning</h2>
+              <p className="text-on-surface-variant leading-relaxed text-base md:text-lg">
                 LEVELUP started in 2020 as a passion project from a group of streetwear enthusiasts who wanted to create pieces that tell a story. Every hoodie, every design is crafted with intention and respect for the culture.
               </p>
-              <p className="text-on-surface-variant leading-relaxed text-lg">
+              <p className="text-on-surface-variant leading-relaxed text-base md:text-lg">
                 We source premium materials, work with local artists, and push boundaries in design. Quality isn't a compromise—it's our foundation.
               </p>
-              <div className="pt-4">
-                <span className="inline-block bg-secondary-fixed text-black font-mono text-xs font-bold px-4 py-2 rounded-lg tracking-wider">EST. 2020</span>
+              <div className="pt-2 md:pt-4">
+                <span className="inline-block bg-secondary-fixed text-black font-mono text-xs font-bold px-3 md:px-4 py-2 rounded-lg tracking-wider">EST. 2020</span>
               </div>
             </div>
-            <div className="relative h-96 md:h-full rounded-2xl overflow-visible shadow-2xl group/image">
+            <div className="relative h-80 md:h-96 lg:h-full rounded-2xl overflow-visible shadow-2xl group/image">
               <img 
                 src={skaPng} 
                 alt="LEVELUP Origin"
-                className="w-full h-full object-cover cursor-zoom-in rounded-2xl"
-                onMouseEnter={() => setShowZoom(true)}
-                onMouseLeave={() => setShowZoom(false)}
+                className="w-full h-full object-cover rounded-2xl transition-all duration-300"
+                style={{ cursor: isMobile ? 'default' : 'zoom-in' }}
+                onMouseEnter={() => !isMobile && setShowZoom(true)}
+                onMouseLeave={() => !isMobile && setShowZoom(false)}
                 onMouseMove={(e) => {
+                  if (isMobile) return
                   const rect = e.currentTarget.getBoundingClientRect()
                   const x = ((e.clientX - rect.left) / rect.width) * 100
                   const y = ((e.clientY - rect.top) / rect.height) * 100
@@ -222,8 +235,15 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
                 }}
               />
               
-              {/* Zoom Crosshair on Image */}
-              {showZoom && (
+              {/* Mobile hint - show only on mobile */}
+              {isMobile && (
+                <div className="absolute bottom-4 left-4 right-4 bg-black/70 text-secondary-fixed text-xs font-mono px-3 py-2 rounded backdrop-blur-sm">
+                  View full image on desktop for interactive zoom
+                </div>
+              )}
+              
+              {/* Zoom Crosshair on Image - Desktop Only */}
+              {showZoom && !isMobile && (
                 <div 
                   className="absolute w-20 h-20 border-3 border-secondary-fixed pointer-events-none rounded-lg"
                   style={{
@@ -236,8 +256,8 @@ export default function About({ cartItems, setCartItems }: AboutProps) {
               )}
             </div>
             
-            {/* Zoom Preview Box - Follows Mouse */}
-            {showZoom && (
+            {/* Zoom Preview Box - Follows Mouse - Desktop Only */}
+            {showZoom && !isMobile && (
               <div 
                 className="fixed w-80 h-80 rounded-xl border-4 border-secondary-fixed overflow-hidden shadow-2xl bg-black z-50"
                 style={{
