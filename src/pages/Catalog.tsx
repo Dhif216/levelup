@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import picPng from '../assets/pic.png'
 
 type CartItem = {
   id: number
@@ -444,7 +445,7 @@ export default function Catalog({ cartItems, setCartItems }: CatalogProps) {
             <div className="holo-container h-[500px] flex items-center justify-center">
               <div className="holo-inner w-full h-full rounded-xl overflow-hidden relative">
                 <img 
-                  src="https://picsum.photos/500/500?random=99"
+                  src={picPng}
                   alt="Holographic Edition"
                   className="w-full h-full object-cover"
                 />
