@@ -444,7 +444,7 @@ export default function Catalog({ cartItems, setCartItems }: CatalogProps) {
             <div className="holo-container h-[500px] flex items-center justify-center">
               <div className="holo-inner w-full h-full rounded-xl overflow-hidden relative">
                 <img 
-                  src="/pic.png"
+                  src="https://picsum.photos/500/500?random=99"
                   alt="Holographic Edition"
                   className="w-full h-full object-cover"
                 />
